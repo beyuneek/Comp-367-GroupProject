@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Success login page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+        }
+
+        header {
+            background: rgb(0, 128, 255);
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #bbb 1px solid;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        header ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        header li {
+            float: left;
+            display: block;
+            padding: 0 15px;
+            font-size: 16px;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header .highlight, header .current a {
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+
+        header a:hover {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .main {
+            padding: 30px 0;
+        }
+
+        .main h1 {
+            color: #333;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .details {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 2px #000000;
+        }
+
+        .details p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Phone</span> Store</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="current"><a href="#">Order Details</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="container">
+            <h1>Order Details</h1>
+            <div class="details">
+                <p th:text="${fname}"></p>
+                <p th:text="${Mname}"></p>
+                <p th:text="${lname}"></p>
+                <p th:text="${email}"></p>
+                <p th:text="${contact}"></p>
+                <p th:text="${billing}"></p>
+                <p th:text="${brand}"></p>
+                <p th:text="${model}"></p>
+                <p th:text="${quantity}"></p>
+                <p th:text="${phoneId}"></p>
+                <p th:text="${totalPrice}"></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
