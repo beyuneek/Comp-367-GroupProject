@@ -52,11 +52,7 @@ public class OrderController {
     	
       }
 	 
-	 @GetMapping("/aboutmyself")
-	    public String showHomePage() {
-	        return "aboutmyself"; // Return the name of your homepage template
-
-	 }
+	 
 	 private String generatePhoneId(String phoneModel) {
 		    // A simple way to generate unique ID based on phone model and current time
 		    return phoneModel.replace(" ", "") + System.currentTimeMillis();
