@@ -59,7 +59,7 @@ public class OrderController {
 	 }
 	 
 	 @RequestMapping("/")
-	 public String showHomePage(Model model) {
+	 public String showTheMainPage(Model model) {
 		 return "index";
 	 }
 	 
