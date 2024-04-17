@@ -2,57 +2,42 @@ pipeline {
     agent any
 
     tools {
-        maven 'MAVEN3'  // Change this based on your Jenkins configuration
-        jdk 'Name_of_JDK_config'  // Change this based on your Jenkins configuration
+        maven 'MAVEN3' // Ensure the name matches the Maven version configured in Jenkins
+        jdk 'OpenJDK-11'    // Make sure JDK name matches the configured JDK
     }
 
     stages {
-        stage('Initialize') {
-            steps {
-                cleanWs()
-            }
-        }
-
         stage('Checkout') {
             steps {
-                checkout scm
+                git url: 'https://github.com/your-repo.git', branch: 'master'
             }
         }
 
-        stage('Compile') {
+
+        stage('Build') {
             steps {
-                script {
-                    def mvn = tool 'MAVEN3'
-                    sh "${mvn}/bin/mvn clean compile"
-                }
+                bat 'mvn clean install' // Using bat instead of sh
             }
         }
 
-        stage('Unit Test') {
+        stage('Test') {
             steps {
-                script {
-                    def mvn = tool 'MAVEN3'
-                    sh "${mvn}/bin/mvn test"
-                }
-            }
-            post {
-                always {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                }
+                bat 'mvn test' // Using bat instead of sh
+                junit 'target/surefire-reports/*.xml'
+                jacoco(execPattern: 'target/jacoco.exec')
             }
         }
+    }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                script {
-                    def mvn = tool 'MAVEN3'
-                    sh "${mvn}/bin/mvn deploy"
-                }
-            }
-            when {
-                branch 'main'
-            }
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
         }
     }
 }
