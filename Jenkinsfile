@@ -24,23 +24,25 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                script {
-                    // Check if there are Java test source files
+    steps {
+        script {
+            // Check if there are any Java test source files
             if (fileExists('src\\test\\java')) {
-                // Execute tests and generate code coverage report
+                // If tests exist, run them and generate code coverage report
                 bat 'mvn test jacoco:report'
-                // Publish the JUnit test results
-                junit 'target/surefire-reports/*.xml'
-                // Publish the JaCoCo code coverage report
-                jacoco(execPattern: 'target/jacoco.exec')
+                junit 'target/surefire-reports/*.xml' // Publish JUnit test results
+                jacoco(execPattern: 'target/jacoco.exec') // Publish JaCoCo code coverage report
             } else {
-                echo 'No test files exist, skipping tests. Marking test stage as successful.'
-                // Optionally, handle the case where no tests exist more gracefully
-            }
-                }
+                // No tests are found, handle gracefully
+                echo 'No test files exist, skipping test execution.'
+                // You can still generate an empty JaCoCo report if needed
+                bat 'mvn jacoco:report'
+                jacoco(execPattern: 'target/jacoco.exec')
             }
         }
+    }
+}
+
     }
 
     post {
