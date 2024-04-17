@@ -22,7 +22,7 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                    def mvn = tool 'M3'
+                    def mvn = tool 'MAVEN3'
                     sh "${mvn}/bin/mvn clean compile"
                 }
             }
@@ -31,7 +31,7 @@ pipeline {
         stage('Unit Test') {
             steps {
                 script {
-                    def mvn = tool 'M3'
+                    def mvn = tool 'MAVEN3'
                     sh "${mvn}/bin/mvn test"
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 echo 'Deploying application...'
                 script {
-                    def mvn = tool 'M3'
+                    def mvn = tool 'MAVEN3'
                     sh "${mvn}/bin/mvn deploy"
                 }
             }
