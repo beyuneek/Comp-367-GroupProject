@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/your-repo.git', branch: 'main'
+                git url: 'https://github.com/beyuneek/Comp-367-GroupProject/', branch: 'main'
             }
         }
 
