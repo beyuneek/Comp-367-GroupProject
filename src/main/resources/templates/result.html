@@ -1,111 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-
 <head>
     <meta charset="ISO-8859-1">
     <title>Success login page</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container {
-            width: 50%;
-            margin: auto;
-        }
+    header {
+        background: #4CAF50; /* Green color for the navbar */
+        color: #ffffff;
+        padding: 20px 0;
+        min-height: 80px;
+    }
 
-        header {
-            background: rgb(0, 128, 255);
-            color: #ffffff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #bbb 1px solid;
-        }
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
+    header h1 {
+        margin: 0;
+        font-size: 28px;
+    }
 
-        header ul {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            overflow: hidden;
-        }
+    header nav ul {
+        list-style: none;
+        padding: 0;
+    }
 
-        header li {
-            float: left;
-            display: block;
-            padding: 0 15px;
-            font-size: 16px;
-        }
+    header nav ul li {
+        display: inline;
+        margin-left: 20px;
+    }
 
-        header #branding {
-            float: left;
-        }
+    header nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
 
-        header #branding h1 {
-            margin: 0;
-        }
+    header nav ul li a:hover {
+        color: #cccccc;
+    }
 
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
+    .main {
+        padding: 30px 0;
+        text-align: center;
+    }
 
-        header .highlight, header .current a {
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-        }
+    .details {
+        background: #ffffff;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+        width: 50%;
+    }
 
-        header a:hover {
-            color: #ffffff;
-            font-weight: bold;
-        }
+    .details p {
+        font-size: 18px;
+        color: #555;
+        margin: 10px 0;
+        text-align: left;
+    }
 
-        .main {
-            padding: 30px 0;
-        }
+    .details span {
+        font-weight: bold;
+    }
+</style>
 
-        .main h1 {
-            color: #333;
-            text-align: center;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-
-        .details {
-            background: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px 2px #000000;
-        }
-
-        .details p {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-    </style>
 </head>
-
 <body>
     <header>
         <div class="container">
-            <div id="branding">
-                <h1><span class="highlight">Phone</span> Store</h1>
-            </div>
+            <h1>Phone Store</h1>
             <nav>
                 <ul>
+
                     <li><a href="/">Go To Home Page</a></li>
                     <li class="current"><a href="#">Order Details</a></li>
+
                 </ul>
             </nav>
         </div>
@@ -115,20 +98,19 @@
         <div class="container">
             <h1>Order Details</h1>
             <div class="details">
-                <p th:text="${fname}"></p>
-                <p th:text="${Mname}"></p>
-                <p th:text="${lname}"></p>
-                <p th:text="${email}"></p>
-                <p th:text="${contact}"></p>
-                <p th:text="${billing}"></p>
-                <p th:text="${brand}"></p>
-                <p th:text="${model}"></p>
-                <p th:text="${quantity}"></p>
-                <p th:text="${phoneId}"></p>
-                <p th:text="${totalPrice}"></p>
+                <p><span th:text="${fname}"></span></p>
+                <p><span th:text="${Mname}"></span></p>
+                <p><span th:text="${lname}"></span></p>
+                <p><span th:text="${email}"></span></p>
+                <p><span th:text="${contact}"></span></p>
+                <p><span th:text="${billing}"></span></p>
+                <p><span th:text="${brand}"></span></p>
+                <p><span th:text="${model}"></span></p>
+                <p><span th:text="${quantity}"></span></p>
+                <p><span th:text="${phoneId}"></span></p>
+                <p><span th:text="${totalPrice}"></span></p>
             </div>
         </div>
     </div>
 </body>
-
 </html>
