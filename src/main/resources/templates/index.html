@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Home page</title>
     <style>
-       body {
+      body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -20,8 +20,8 @@
 header {
     background: #4CAF50; /* Green background for the header */
     color: #ffffff;
-    padding-top: 30px;
-    min-height: 70px;
+    padding-top: 10px; /* Reduced padding-top from 30px to 10px */
+    min-height: 50px; /* Reduced min-height from 70px to 50px */
     border-bottom: #bbb 1px solid;
 }
 
@@ -42,7 +42,7 @@ header ul {
 header li {
     float: left;
     display: block;
-    padding: 0 15px;
+    padding: 0 10px; /* Adjusted previously */
     font-size: 16px;
 }
 
@@ -56,7 +56,7 @@ header #branding h1 {
 
 header nav {
     float: right;
-    margin-top: 10px;
+    margin-top: 0; /* Removed additional margin-top to further decrease the height */
 }
 
 header .highlight, header .current a {
@@ -118,6 +118,7 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
     background: #45a049; /* Slightly darker green on hover */
 }
+
 
     </style>
 </head>
