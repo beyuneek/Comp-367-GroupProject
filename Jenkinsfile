@@ -26,10 +26,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    if (fileExists('src\\test\\java')) { // Checks if there are test files in Windows path format
-                        bat 'mvn test' // Runs tests if they exist
-                        junit 'target\\surefire-reports\\*.xml' // Publishes test results in Windows path format
-                        jacoco(execPattern: 'target\\jacoco.exec') // Collects code coverage metrics
+                    if (fileExists('src\\test\\java')) {
+                        bat 'mvn test'
                     } else {
                         echo 'No test files exist, skipping tests.'
                     }
