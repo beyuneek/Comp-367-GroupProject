@@ -26,10 +26,19 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    // Check if there are Java test source files
                     if (fileExists('src\\test\\java')) {
-                        bat 'mvn test'
+                        // Execute tests and generate code coverage report
+                        bat 'mvn test jacoco:report'
+                        // Publish the JUnit test results
+                        junit 'target/surefire-reports/*.xml'
+                        // Publish the JaCoCo code coverage report
+                        jacoco(execPattern: 'target/jacoco.exec')
                     } else {
-                        echo 'No test files exist, skipping tests.'
+                        echo 'No test files exist, skipping tests but generating an empty code coverage report.'
+                        // Optionally generate an empty code coverage report or handle the case where no tests exist
+                        bat 'mvn jacoco:report'
+                        jacoco(execPattern: 'target/jacoco.exec')
                     }
                 }
             }
