@@ -45,6 +45,55 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.7</version> <!-- Ensure to use the latest version available -->
+            <executions>
+                <execution>
+                    <id>prepare-agent</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <!-- Attached to Maven test phase to generate report automatically after tests are run -->
+                <execution>
+                    <id>report</id>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                    <configuration>
+                        <!-- Specify output directory for the code coverage report -->
+                        <outputDirectory>${project.build.directory}/coverage-reports</outputDirectory>
+                    </configuration>
+                </execution>
+                <!-- Optional: Check rules to ensure a certain level of coverage -->
+                <execution>
+                    <id>check-coverage</id>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                    <configuration>
+                        <rules>
+                            <rule>
+                                <element>PACKAGE</element>
+                                <limits>
+                                    <limit>
+                                        <counter>LINE</counter>
+                                        <value>COVEREDRATIO</value>
+                                        <minimum>0.80</minimum>  <!-- Example: 80% line coverage required -->
+                                    </limit>
+                                </limits>
+                            </rule>
+                        </rules>
+                        <!-- Exclude failure in case the coverage check does not meet the specified ratio -->
+                        <haltOnFailure>false</haltOnFailure>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 		</plugins>
 	</build>
 
