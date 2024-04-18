@@ -24,29 +24,68 @@ pipeline {
         }
 
         stage('Test') {
-    steps {
-        script {
-            // Check if there are any Java test source files
-            if (fileExists('src\\test\\java')) {
-                try {
-                    // Execute tests and generate code coverage report
-                    bat 'mvn test jacoco:report'
-                    junit 'target/surefire-reports/*.xml'
-                    jacoco(execPattern: 'target/jacoco.exec')
-                } catch (Exception e) {
-                    echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
+            steps {
+                script {
+                    if (fileExists('src\\test\\java')) {
+                        try {
+                            bat 'mvn test jacoco:report'
+                            junit 'target/surefire-reports/*.xml'
+                            jacoco(execPattern: 'target/jacoco.exec')
+                        } catch (Exception e) {
+                            echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
+                        }
+                    } else {
+                        echo 'No test files exist, skipping tests.'
+                        writeFile file: 'target/jacoco.exec', text: ''
+                        bat 'mvn jacoco:report'
+                        jacoco(execPattern: 'target/jacoco.exec')
+                    }
                 }
-            } else {
-                echo 'No test files exist, skipping tests.'
-                // Create a dummy file to satisfy jacoco report generation
-                writeFile file: 'target/jacoco.exec', text: ''
-                bat 'mvn jacoco:report'
-                jacoco(execPattern: 'target/jacoco.exec')
             }
         }
-    }
-}
 
+        stage('Deliver') {
+            steps {
+                bat 'mvn deploy' // Deploys the built artifact to the Maven repository specified in pom.xml
+            }
+        }
+
+        stage('Deploy to Dev Env') {
+            steps {
+                script {
+                    echo 'Mock deploy to Development Environment'
+                    bat 'deployApp -env Dev'
+                    // Replace 'deployApp' with your actual deployment command/script
+                }
+            }
+        }
+
+        stage('Deploy to QAT Env') {
+            steps {
+                script {
+                    echo 'Mock deploy to Quality Assurance Testing Environment'
+                    bat 'deployApp -env QAT'
+                }
+            }
+        }
+
+        stage('Deploy to Staging Env') {
+            steps {
+                script {
+                    echo 'Mock deploy to Staging Environment'
+                    bat 'deployApp -env Staging'
+                }
+            }
+        }
+
+        stage('Deploy to Production Env') {
+            steps {
+                script {
+                    echo 'Mock deploy to Production Environment'
+                    bat 'deployApp -env Production'
+                }
+            }
+        }
     }
 
     post {
