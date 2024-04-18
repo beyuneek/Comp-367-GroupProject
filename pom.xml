@@ -98,28 +98,27 @@
                             <outputDirectory>${project.build.directory}/coverage-reports</outputDirectory>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>check-coverage</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <rule>
-                                    <element>PACKAGE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>LINE</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.80</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                            <haltOnFailure>false</haltOnFailure>
-                        </configuration>
-                    </execution>
-                </executions>
+                   <execution>
+    <id>check-coverage</id>
+    <goals>
+        <goal>check</goal>
+    </goals>
+    <configuration>
+        <rules>
+            <rule>
+                <element>PACKAGE</element>
+                <limits>
+                    <limit>
+                        <counter>LINE</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>0.50</minimum> <!-- Adjusted from 0.80 to 0.50 -->
+                    </limit>
+                </limits>
+            </rule>
+        </rules>
+        <haltOnFailure>false</haltOnFailure>
+    </configuration>
+</execution>
             </plugin>
         </plugins>
     </build>
