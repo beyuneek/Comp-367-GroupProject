@@ -26,10 +26,16 @@ pipeline {
         stage('Test') {
     steps {
         script {
-            try {
-                sh 'mvn test'
-            } catch (Exception e) {
-                echo "Tests failed, but pipeline continues. Error: ${e.getMessage()}"
+            if (fileExists('src\\test\\java')) {
+                try {
+                    // Execute tests and generate code coverage report
+                    bat 'mvn test jacoco:report'
+                    // Add appropriate steps to publish test results and coverage
+                } catch (Exception e) {
+                    echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
+                }
+            } else {
+                echo 'No test files exist, skipping tests.'
             }
         }
     }
