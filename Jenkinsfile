@@ -23,26 +23,26 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    if (fileExists('src\\test\\java')) {
-                        try {
-                            bat 'mvn test jacoco:report'
-                            junit 'target/surefire-reports/*.xml'
-                            jacoco(execPattern: 'target/jacoco.exec')
-                        } catch (Exception e) {
-                            echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
-                        }
-                    } else {
-                        echo 'No test files exist, skipping tests.'
-                        writeFile file: 'target/jacoco.exec', text: ''
-                        bat 'mvn jacoco:report'
-                        jacoco(execPattern: 'target/jacoco.exec')
-                    }
+       stage('Test') {
+    steps {
+        script {
+            if (fileExists('src\\test\\java')) {
+                try {
+                    bat 'mvn test jacoco:report'
+                    junit 'target/surefire-reports/*.xml'
+                    jacoco() // Simplified call, which will look for 'target/jacoco.exec' by default
+                } catch (Exception e) {
+                    echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
                 }
+            } else {
+                echo 'No test files exist, skipping tests.'
+                writeFile file: 'target/jacoco.exec', text: ''
+                bat 'mvn jacoco:report'
+                jacoco() // Simplified call for Jacoco
             }
         }
+    }
+}
 
         stage('Deliver') {
             steps {
