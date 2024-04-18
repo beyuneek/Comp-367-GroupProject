@@ -30,7 +30,17 @@ pipeline {
                 try {
                     bat 'mvn test jacoco:report'
                     junit 'target/surefire-reports/*.xml'
-                    jacoco() // Simplified call, which will look for 'target/jacoco.exec' by default
+                    jacoco(
+    execPattern: '**/target/jacoco.exec',
+    classPattern: '**/target/classes',
+    sourcePattern: '**/src/main/java',
+    check: [
+        enabled: true,
+        globalThreshold: [
+            minimumClassCoverage: '80'
+        ]
+    ]
+) // Simplified call, which will look for 'target/jacoco.exec' by default
                 } catch (Exception e) {
                     echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
                 }
