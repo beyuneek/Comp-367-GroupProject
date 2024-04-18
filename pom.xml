@@ -20,30 +20,39 @@
     </properties>
     
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-         <dependency>
-                 <groupId>org.springframework.boot</groupId>
-                 <artifactId>spring-boot-starter-test</artifactId>
-                 <scope>test</scope>
-             </dependency>
-             
+        <!-- Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        
+        <!-- Starter for using Thymeleaf views in Spring Boot applications, including the Thymeleaf template engine and its Spring integration. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        
+        <!-- Optional Spring Boot Developer Tools for automatic restarts. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        
+        <!-- Spring Boot Starter Test provides all the necessary dependencies for writing tests in Spring Boot. -->
+        <!-- Ensure that this is the only spring-boot-starter-test dependency in your pom.xml -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <!-- Exclude JUnit 4 to use JUnit 5 (Jupiter) -->
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     
@@ -62,15 +71,16 @@
     
     <build>
         <plugins>
+            <!-- Spring Boot Maven plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- Update JaCoCo plugin to a version that supports Java 17 -->
+            <!-- JaCoCo plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version> <!-- This is a placeholder, use the latest version that supports Java 17 -->
+                <version>0.8.11</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
