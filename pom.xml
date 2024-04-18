@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -43,14 +43,14 @@
     
     <distributionManagement>
         <repository>
-            <id>internal-repo</id> <!-- Use the appropriate repository ID -->
+            <id>internal-repo</id>
             <name>Internal Release Repository</name>
-            <url>http://localhost:8081/repository/maven-releases/</url> <!-- Change to your repository URL -->
+            <url>http://localhost:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>internal-snapshot-repo</id> <!-- Use the appropriate repository ID -->
+            <id>internal-snapshot-repo</id>
             <name>Internal Snapshot Repository</name>
-            <url>http://localhost:8081/repository/maven-snapshots/</url> <!-- Change to your repository URL -->
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
     
@@ -60,10 +60,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- Update JaCoCo plugin to a version that supports Java 17 -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version> <!-- Ensure to use the latest version available -->
+                <version>0.8.11</version> <!-- This is a placeholder, use the latest version that supports Java 17 -->
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -94,7 +95,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.80</minimum>  <!-- Example: 80% line coverage required -->
+                                            <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
