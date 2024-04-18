@@ -48,20 +48,18 @@ pipeline {
 }
 
         stage('Deliver') {
-            steps {
-                bat 'mvn deploy' // Deploys the built artifact to the Maven repository specified in pom.xml
+    steps {
+        script {
+            try {
+                bat 'mvn deploy -X' // '-X' for debug output, which can help diagnose issues
+            } catch (Exception e) {
+                echo "Failed to deploy: ${e.getMessage()}"
+                throw e // Rethrow the exception to fail the stage properly
             }
         }
+    }
+}
 
-        stage('Deploy to Dev Env') {
-            steps {
-                script {
-                    echo 'Mock deploy to Development Environment'
-                    bat 'deployApp -env Dev'
-                    // Replace 'deployApp' with your actual deployment command/script
-                }
-            }
-        }
 
         stage('Deploy to QAT Env') {
             steps {
