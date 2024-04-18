@@ -24,62 +24,29 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                script {
-                    // Check if there are any Java test source files
-                    if (fileExists('src\\test\\java')) {
-                        try {
-                            // Execute tests and generate code coverage report
-                            bat 'mvn test jacoco:report'
-                            junit 'target/surefire-reports/*.xml'
-                            jacoco(execPattern: 'target/jacoco.exec')
-                        } catch (Exception e) {
-                            echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
-                        }
-                    } else {
-                        echo 'No test files exist, skipping tests.'
-                        // Create a dummy file to satisfy jacoco report generation
-                        writeFile file: 'target/jacoco.exec', text: ''
-                        bat 'mvn jacoco:report'
-                        jacoco(execPattern: 'target/jacoco.exec')
-                    }
+    steps {
+        script {
+            // Check if there are any Java test source files
+            if (fileExists('src\\test\\java')) {
+                try {
+                    // Execute tests and generate code coverage report
+                    bat 'mvn test jacoco:report'
+                    junit 'target/surefire-reports/*.xml'
+                    jacoco(execPattern: 'target/jacoco.exec')
+                } catch (Exception e) {
+                    echo "Tests failed, but build will not fail. Error: ${e.getMessage()}"
                 }
+            } else {
+                echo 'No test files exist, skipping tests.'
+                // Create a dummy file to satisfy jacoco report generation
+                writeFile file: 'target/jacoco.exec', text: ''
+                bat 'mvn jacoco:report'
+                jacoco(execPattern: 'target/jacoco.exec')
             }
         }
+    }
+}
 
-        stage('Deliver') {
-            steps {
-                bat 'mvn deploy' // Assumes Maven deploy plugin is configured for repository deployment
-            }
-        }
-
-        stage('Deploy to Dev Env') {
-            steps {
-                echo 'Mock deploy to Development environment'
-                // Example: bat 'deploy-script-dev'
-            }
-        }
-
-        stage('Deploy to QAT Env') {
-            steps {
-                echo 'Mock deploy to QAT environment'
-                // Example: bat 'deploy-script-qat'
-            }
-        }
-
-        stage('Deploy to Staging Env') {
-            steps {
-                echo 'Mock deploy to Staging environment'
-                // Example: bat 'deploy-script-staging'
-            }
-        }
-
-        stage('Deploy to Production Env') {
-            steps {
-                echo 'Mock deploy to Production environment'
-                // Example: bat 'deploy-script-prod'
-            }
-        }
     }
 
     post {
